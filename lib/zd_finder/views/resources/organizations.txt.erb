@@ -1,0 +1,36 @@
+Organization: <%= resource.name.black.bold %>
+
+<%= "ID: #{ resource._id }, external_id: #{ resource.external_id }, url: #{ resource.url }".light_blue %>
+
+Properties:
+-----------
+
+Domain names: <%= resource.domain_names.join(", ") %>
+Detail: <%= resource.details %>
+Shared Tickets: <%= colorize_boolean(resource.shared_tickets) %>
+
+
+Meta:
+-----
+
+Created at: <%= resource.created_at.to_s %>
+Tags:  <%= resource.tags.join(", ") %>
+
+
+Users:
+------<% if resource.users.empty? %>
+The organization does not have any users
+<% else %>
+<% resource.users.each do |user| %>
+- Name: <%= user.name %>, Email: <%= user.email %>, ID: <%= user._id %>
+<% end %><% end %>
+
+Tickets:
+------<% if resource.tickets.empty? %>
+The organization does not have any tickets
+<% else %>
+<% resource.tickets.each do |ticket| %>
+- Subject: <%= ticket.subject %>, ID: <%= ticket._id %>
+<% end %><% end %>
+
+<%= ("-" * 100).black.bold %>

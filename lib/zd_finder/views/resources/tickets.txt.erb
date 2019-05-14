@@ -1,0 +1,58 @@
+
+Ticket: <%= resource.subject.black.bold %>
+
+<%= "ID: #{ resource._id }, external_id: #{ resource.external_id }, url: #{ resource.url }".light_blue %>
+
+Properties:
+-----------
+
+Type: <%= resource.type %>
+Description: <%= resource.description %>
+Priority: <%= resource.priority %>
+Status: <%= resource.status %>
+Has incidents: <%= colorize_boolean(resource.has_incidents) %>
+Via: <%= resource.via %>
+Due at:  <%= resource.due_at %>
+
+
+Meta:
+-----
+
+Created at: <%= resource.created_at %>
+Tags:  <%= resource.tags.join(", ") %>
+
+
+Submitter:
+--------
+<% if resource.submitter_id.nil? %>
+Anonymous
+<% elsif resource.submitter.nil? %>
+Submitter #<%= resource.submitter_id %>
+<% else %>
+ID: <%= resource.submitter._id %>
+Name: <%= resource.submitter.name %>
+Email: <%= resource.submitter.email %>
+<% end %>
+
+Assigne:
+--------
+<% if resource.assignee_id.nil? %>
+No user has been assigned to the ticket yet
+<% elsif resource.assignee.nil? %>
+Assignee #<%= resource.assignee_id %> [User does not exist anymore]
+<% else %>
+ID: <%= resource.assignee._id %>
+Name: <%= resource.assignee.name %>
+Email: <%= resource.assignee.email %>
+<% end %>
+
+Organization:
+-------------
+<% if resource.organization %>
+ID: <%= resource.organization._id %>
+Name: <%= resource.organization.name %>
+<% else %>
+No organization has been assigned to the ticket yet
+<% end %>
+
+<%= ("-" * 100).black.bold %>

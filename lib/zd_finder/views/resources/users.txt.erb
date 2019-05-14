@@ -1,0 +1,57 @@
+
+User: <%= resource.name.black.bold %>
+
+<%= "ID: #{ resource._id }, external_id: #{ resource.external_id }, url: #{ resource.url }".light_blue %>
+
+Properties:
+-----------
+
+Alias: <%= resource.alias %>
+Email: <%= resource.email %>
+Phone: <%= resource.phone %>
+Signature: <%= resource.signature %>
+Role: <%= resource.role %>
+Active: <%= colorize_boolean(resource.active) %>
+Verified: <%= colorize_boolean(resource.verified) %>
+Shared: <%= colorize_boolean(resource.shared) %>
+Suspended: <%= colorize_boolean(resource.suspended) %>
+Locale: <%= resource.locale %>
+Timezone: <%= resource.locale %>
+Last login at: <%= resource.last_login_at.to_s %>
+
+
+Meta:
+-----
+
+Created at: <%= resource.created_at.to_s %>
+Tags:  <%= resource.tags.join(", ") %>
+
+
+Organization:
+------------
+<% if resource.organization_id.nil? %>
+The user does not belong to any organization
+<% elsif resource.organization.nil? %>
+Organization #<%= resource.organization_id %> (the organization does not exist anymore)
+<% else %>
+ID: <%= resource.organization._id %>
+Name: <%= resource.organization.name %>
+<% end %>
+
+Submitted tickets:
+-----------------<% if resource.submitted_tickets.empty? %>
+The user hasn't submitted any tickets yet
+<% else %>
+<% resource.submitted_tickets.each do |ticket| %>
+- Subject: <%= ticket.subject %>, ID: <%= ticket._id %>
+<% end %><% end %>
+
+Assigned tickets:
+-----------------<% if resource.assigned_tickets.empty? %>
+The user hasn't been assigned to any tickets yet
+<% else %>
+<% resource.assigned_tickets.each do |ticket| %>
+- Subject: <%= ticket.subject %>, ID: <%= ticket._id %>
+<% end %><% end %>
+
+<%= ("-" * 100).black.bold %>
