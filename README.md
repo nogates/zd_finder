@@ -20,87 +20,11 @@ You are all set! :tada:
 
 ## Running the application
 
-ZdFinder supports searching organizations, tickets and users resources. Any attribute of each particular resource can be used. For example, you can the `_id` to find tickets by its primary key
+Execute the launcher file provided under the `bin` folder and follow the options. The application can be exited at any time by typing `quit` and it also controls that the resource and field values are correct. The application has the same functionalities as it does on original version on the master branch
 
 ```
-$ bin/zd_finder -r tickets -f _id -v 87db32c5-76a3-4069-954c-7d59c6c21de0
-
-  1 tickets found
-
-
-Ticket: A Problem in Morocco
-
-ID: 87db32c5-76a3-4069-954c-7d59c6c21de0, external_id: 1c61056c-a5ad-478a-9fd6-38889c3cd728, url: http://initech.zendesk.com/api/v2/tickets/87db32c5-76a3-4069-954c-7d59c6c21de0.json
-[...]
+$ bin/zd_finder
 ```
-
-but you can also use the `external_id` and expect the same results
-
-```
-$ bin/zd_finder -r tickets -f external_id -v 1c61056c-a5ad-478a-9fd6-38889c3cd728
-
-  1 tickets found
-
-
-Ticket: A Problem in Morocco
-
-ID: 87db32c5-76a3-4069-954c-7d59c6c21de0, external_id: 1c61056c-a5ad-478a-9fd6-38889c3cd728, url: http://initech.zendesk.com/api/v2/tickets/87db32c5-76a3-4069-954c-7d59c6c21de0.json
-[...]
-```
-
-Or search users in a very similar way:
-
-```
-$ bin/zd_finder -r users -f _id -v 3
-
-  1 users found
-
-
-User: Ingrid Wagner
-
-ID: 3, external_id: 85c599c1-ebab-474d-a4e6-32f1c06e8730, url: http://initech.zendesk.com/api/v2/users/3.json
-[...]
-```
-
-Searching on array fields is also supported, though only one value can be passed at this moment
-
-```
-$ bin/zd_finder -r organizations -f tags -v Hendricks
-
- 1 organizations found
-
-
-  Organization: Xylar
-
-ID: 104, external_id: f6eb60ad-fe37-4a45-9689-b32031399f93, url: http://initech.zendesk.com/api/v2/organizations/104.json
-```
-
-Also, you can pass the option `-l` to see all searchable fields by resource
-
-```
- $ bin/zd_finder -l
-
- AVAIABLE SEARCHABLE FIELDS BY RESOURCE
- ======================================
-
-
-   Tickets
-   -------
-
-   _id assignee_id created_at description due_at external_id has_incidents organization_id priority status subject submitter_id tags type url via
-
-[...]
-```
-
-Finally, you can use `-h` or `--help` to see a more detailed help message of all the options available
-
-#### Alternative interface
-
-In the specification document, there was an example of a possible implementation of the application that was using some kind of interactive interface. IMO, interactive interfaces are harder to work with (they cannot be easily scripted and they are harder to debug, since there is not an invocation command that can be shared with developers). This is why I've decided to implement the application using options on the command line. Also, it didn't seem it was a requirement or at least it wasn't specified at such anywhere.
-
-However, I didn't want to submit the exercise without it in case that it was a nice to have and people were expecting it. So, I've created a different branch: [interative-cli]() that changes only the `cli.rb` and the `cli_spec.rb` files.
-
-Please, checkout that branch if you prefer to see the interactive version in action
 
 ## Tests
 
