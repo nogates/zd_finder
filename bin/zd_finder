@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative "../lib/zd_finder"
+
+begin
+  ZdFinder::Cli.new.call
+rescue StandardError => e
+  warn "There was an error processing the command: #{ e.message }"
+  warn "Backtrace: #{ e.backtrace.inspect }"
+end

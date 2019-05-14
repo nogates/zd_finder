@@ -1,0 +1,10 @@
+<% if search.error %>
+  There was an error when fetching data from the collection: <%= search.error %>
+<% elsif search.resources.empty? %>
+  No <%= search.resource_class.slug %> could be found.
+<% else %>
+  <%= search.resources.count %> <%= search.resource_class.slug %> found
+  <% search.resources.each do |resource| %>
+    <%= render "resources/#{ resource.class.slug }", resource: resource %>
+  <% end %>
+<% end %>

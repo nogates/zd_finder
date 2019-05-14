@@ -1,0 +1,10 @@
+
+AVAIABLE SEARCHABLE FIELDS BY RESOURCE
+======================================
+
+<% resource_classes.each do |klass| %>
+  <%= klass.slug.capitalize %>
+  <%= "-" * klass.slug.length %>
+
+  <%= klass.properties.to_a.sort.join(" ") %>
+<% end %>
